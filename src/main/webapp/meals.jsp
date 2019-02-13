@@ -21,6 +21,8 @@
 <h3><a href="index.html">Home</a></h3>
 <h2>Meals</h2>
 
+<a href="meals?action=add">Создать новый прием пищи</a>
+
 <table border="1">
     <caption>Список еды</caption>
     <tr>
@@ -31,14 +33,19 @@
     </tr>
     <c:forEach items="${meals}" var="meal">
         <tr class=${meal.isExcess() ? 'excess':'not_excess'}>
+            <td style="visibility: hidden">${meal.getId()}</td>
             <td><fmt:parseDate value="${ meal.getDateTime() }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
                 <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }" />
             <td>${meal.getDescription()}</td>
             <td>meal.getCalories()</td>
             <td>${meal.isExcess() ? 'превышение':''}</td>
+            <td><a href="meals?action=update&id=${meal.getId()}">Редактирвоать еду</a></td>
+            <td><a href="meals?action=delete&id=${meal.getId()}">Удалить еду</a></td>
         </tr>
     </c:forEach>
 </table>
+
+<a href="meals?action=add">Создать новый прием пищи</a>
 
 </body>
 </html>
